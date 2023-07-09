@@ -1,0 +1,43 @@
+<div class="control-wrapper">
+  <div class="timer-section">
+    <div class="section-title">Timer, ms</div>
+    <mat-form-field>
+      <input matInput placeholder="300" [ngModel]="timer" (ngModelChange)="timerUpdate.next($event)"/>
+    </mat-form-field>
+  </div>
+  <div class="size-section">
+    <div class="section-title">Array size</div>
+    <mat-form-field>
+      <input matInput placeholder="1000" [ngModel]="arraySize" (ngModelChange)="arraySizeUpdate.next($event)"/>
+    </mat-form-field>
+  </div>
+  <div class="additional-section">
+    <div class="section-title">Additional array ids</div>
+    <mat-form-field>
+      <input matInput placeholder="956, 998, 970" [ngModel]="additionalIds" (ngModelChange)="additionalIdsUpdate.next($event)"/>
+    </mat-form-field>
+  </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+    <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+    <td mat-cell *matCellDef="let emp">
+      <div *ngIf="!(column === 'child')" [ngStyle]="{'background-color': column === 'color' ? emp[column] : null}">{{ emp[column] }}</div>
+      <table *ngIf="column === 'child'" mat-table [dataSource]="emp[column]" class="mat-elevation-z8 table-margin">
+        <ng-container [matColumnDef]="column1" *ngFor="let column1 of displayedChildColumns">
+          <th mat-header-cell *matHeaderCellDef>{{ column1 }}</th>
+          <td mat-cell *matCellDef="let emp1">
+            <div [ngStyle]="{'background-color': column1 === 'color' ? emp1[column1] : null}">{{ emp1[column1] }}</div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedChildColumns"></tr>
+        <tr mat-row *matRowDef="let emprow; columns: displayedChildColumns"></tr>
+      </table>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let emprow; columns: displayedColumns"></tr>
+</table>
