@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "example-app-v12": {
+    "test-task": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/example-app-v12",
+            "outputPath": "dist/test-task",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -76,24 +76,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "example-app-v12:build"
+            "browserTarget": "test-task:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "example-app-v12:build:production"
+              "browserTarget": "test-task:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "example-app-v12:build"
+            "browserTarget": "test-task:build"
           }
         }
       }
     }
   },
-  "defaultProject": "example-app-v12",
+  "defaultProject": "test-task",
   "cli": {
     "packageManager": "yarn",
     "analytics": false
